@@ -1,0 +1,1 @@
+{{range $index, $service := service "mesos-master"}}{{if $index}},{{end}}{{$service.Address}}:{{$service.Port}}{{end}}

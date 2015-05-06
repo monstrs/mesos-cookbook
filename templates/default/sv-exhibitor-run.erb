@@ -1,0 +1,13 @@
+#!/bin/sh
+exec 2>&1
+
+export servicehost=`hostname -i`
+
+exec chpst -u <%= node['exhibitor']['user'] %> \
+  java -Dlog4j.configuration=file://<%= node['exhibitor']['install_dir'] %>/log4j.properties \
+  -jar <%= node['exhibitor']['install_dir'] %>/<%= node['exhibitor']['version'] %>.jar \
+  --port <%= node['exhibitor']['cli']['port'] %> \
+  --configtype <%= node['exhibitor']['cli']['configtype'] %> \
+  --defaultconfig <%= node['exhibitor']['cli']['defaultconfig'] %> \
+  --fsconfigdir <%= node['exhibitor']['install_dir'] %> \
+  --hostname ${servicehost}

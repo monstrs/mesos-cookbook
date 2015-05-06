@@ -1,0 +1,12 @@
+AllCops:
+  Exclude:
+    - test/**/*
+
+SpaceAfterComma:
+  Enabled: false
+
+SingleSpaceBeforeFirstArg:
+  Enabled: false
+
+LineLength:
+  Max: 200

@@ -1,0 +1,12 @@
+#!/bin/sh
+exec 2>&1
+
+cd <%= node['mesos']['kubernetes']['target'] %>/bin
+
+mesos_master=`cat /etc/mesos/zk`
+kube_apiserver=`cat /etc/mesos/kube-apiserver`
+
+exec chpst ./km controller-manager \
+            --master=${kube_apiserver} \
+            --mesos_master=${mesos_master} \
+            --v=<%= node['mesos']['kubernetes']['log_level'] %>

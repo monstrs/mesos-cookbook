@@ -1,0 +1,10 @@
+[template]
+prefix = "/"
+src = "haproxy.tmpl"
+dest = "/etc/haproxy/haproxy.cfg"
+owner = "root"
+mode = "0644"
+keys = [
+  "/registry/services/endpoints"
+]
+reload_cmd = "service haproxy reload"

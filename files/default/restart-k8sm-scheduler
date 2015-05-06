@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ ! -s /etc/mesos/zk ];
+then
+  echo "/etc/mesos/zk not found or empty"
+  exit 0
+fi
+
+if [ ! -s /etc/mesos/etcd ];
+then
+  echo "/etc/mesos/etcd not found or empty"
+  exit 0
+fi
+
+if [ ! -s /etc/mesos/kube-apiserver ];
+then
+  echo "/etc/mesos/kube-apiserver not found or empty"
+  exit 0
+fi
+
+sv restart k8sm-scheduler

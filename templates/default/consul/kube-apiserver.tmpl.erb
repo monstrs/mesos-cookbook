@@ -1,0 +1,1 @@
+{{range $index, $service := service "kube-apiserver"}}{{if $index}},{{end}}http://{{$service.Address}}:{{$service.Port}}{{end}}

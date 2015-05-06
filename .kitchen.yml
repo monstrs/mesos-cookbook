@@ -1,0 +1,59 @@
+---
+driver_plugin: ec2_shared
+driver_config:
+  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
+
+provisioner:
+  name: chef_zero
+
+platforms:
+- name: ec2
+  driver_plugin: ec2_shared
+  driver_config:
+    username: ubuntu
+    image_id: <%= ENV['DEFAULT_IMAGE'] %>
+    ssh_key: <%= ENV['AWS_PRIVATE_KEY_PATH'] %>
+    flavor_id: m3.medium
+    subnet_id: <%= ENV['AWS_SUBNET_ID'] %>
+    security_group_ids: []
+  attributes:
+    mesos:
+      consul:
+        check_interval: 20s
+    consul:
+      extra_params:
+        atlas_token: <%= ENV['ATLAS_TOKEN'] %>
+        atlas_infrastructure: <%= ENV['ATLAS_INFRASTRUCTURE'] %>
+        addresses:
+          http: 0.0.0.0
+
+suites:
+  - name: discovery
+    run_list:
+      - recipe[apt]
+      - recipe[mesos_test::discovery]
+    attributes:
+      consul:
+        service_mode: bootstrap
+  - name: master
+    run_list:
+      - recipe[apt]
+      - recipe[mesos_test::master]
+    attributes:
+  - name: slave
+    run_list:
+      - recipe[apt]
+      - recipe[mesos_test::slave]
+    attributes:
+  - name: kubernetes
+    run_list:
+      - recipe[apt]
+      - recipe[mesos_test::kubernetes]
+    attributes:
+  - name: load-balancer
+    run_list:
+      - recipe[apt]
+      - recipe[mesos_test::load_balancer]
+    attributes:

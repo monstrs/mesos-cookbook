@@ -1,0 +1,4 @@
+image: monstrs/kitchen-ec2
+script:
+  - bundle install
+  - bundle exec rake test

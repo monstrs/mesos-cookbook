@@ -1,0 +1,1 @@
+{{if service "zookeeper"}}zk://{{range $index, $service := service "zookeeper"}}{{if $index}},{{end}}{{$service.Address}}:{{$service.Port}}{{end}}/mesos{{end}}

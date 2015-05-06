@@ -1,0 +1,19 @@
+#!/bin/sh
+exec 2>&1
+
+cd <%= node['mesos']['kubernetes']['target'] %>/bin
+
+mesos_master=`cat /etc/mesos/zk`
+etcd_servers=`cat /etc/mesos/etcd`
+kube_apiserver=`cat /etc/mesos/kube-apiserver`
+
+export servicehost=`hostname -i`
+
+exec chpst ./km scheduler \
+            --address=${servicehost} \
+            --mesos_master=${mesos_master} \
+            --etcd_servers=${etcd_servers} \
+            --mesos_user=<%= node['mesos']['kubernetes']['mesos_user'] %> \
+            --api_servers=${kube_apiserver} \
+            --allow_privileged=true \
+            --v=<%= node['mesos']['kubernetes']['log_level'] %>

@@ -1,0 +1,4 @@
+backend = "<%= node['confd']['backend'] %>"
+interval = <%= node['confd']['interval'] %>
+nodes = [{{range $index, $service := service "etcd"}}{{if $index}},{{end}}"http://{{$service.Address}}:{{$service.Port}}"{{end}}]
+log-level = "<%= node['confd']['log-level'] %>"
