@@ -19,6 +19,10 @@
 
 default['java']['jdk_version'] = '7'
 
+default['go']['version'] = '1.4'
+default['go']['filename'] = "go1.4.#{node['os']}-#{node['go']['platform']}.tar.gz"
+default['go']['url'] = "http://golang.org/dl/#{node['go']['filename']}"
+
 default['exhibitor']['user']                   = 'root'
 default['exhibitor']['cli']['port']            = 7070
 default['exhibitor']['config']['servers_spec'] = ''

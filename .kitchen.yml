@@ -57,3 +57,8 @@ suites:
       - recipe[apt]
       - recipe[mesos_test::load_balancer]
     attributes:
+  - name: dns
+    run_list:
+      - recipe[apt]
+      - recipe[mesos_test::dns]
+    attributes:

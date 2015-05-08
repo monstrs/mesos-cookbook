@@ -96,6 +96,7 @@ GRAPH
     etcd (>= 0.0.0)
     exhibitor (>= 0.0.0)
     git (>= 0.0.0)
+    golang (>= 0.0.0)
     haproxy (>= 0.0.0)
     java (>= 0.0.0)
     runit (>= 0.0.0)
